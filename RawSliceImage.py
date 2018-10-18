@@ -138,7 +138,6 @@ if __name__ == '__main__':
     # Star Walabot capture process
     print("Initialize API")
     wb.Init()
-    wb.Initialize()
 
     # Check if a Walabot is connected
     try:
@@ -152,7 +151,7 @@ if __name__ == '__main__':
     print("Walabot API version: {}".format(ver))
 
     print("Connected to Walabot")
-    wb.SetProfile(wb.PROF_TRACKER)
+    wb.SetProfile(wb.PROF_SENSOR)
 
     # Set scan arena
     wb.SetArenaR(*ARENA[0])
@@ -171,6 +170,7 @@ if __name__ == '__main__':
 
     while stat == wb.STATUS_CALIBRATING and prog < 100:
         print("Calibrating " + str(prog) + "%")
+        wb.Trigger()
         stat, prog = wb.GetStatus()
 
     posmap = GenPosMap()
